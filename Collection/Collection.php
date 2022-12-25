@@ -5,7 +5,7 @@ use JsonException;
 use Kcpck\Collection\Traits\Iterator;
 use Kcpck\Collection\Traits\Countable;
 use Kcpck\Collection\Traits\ArrayAccess;
-use Kcpck\Exception\emptyCollectionException;
+use Kcpck\Exception\EmptyCollectionException;
 
 class Collection implements Interfaces\Collection
 {
@@ -149,12 +149,12 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * @throws emptyCollectionException
+     * @throws EmptyCollectionException
      */
     public function byKey(string $key)
     {
         if ($this->empty()) {
-            throw new emptyCollectionException('Key not found in collection');
+            throw new EmptyCollectionException('Key not found in collection');
         }
 
         return $this->items[$key] ?? null;
@@ -162,12 +162,12 @@ class Collection implements Interfaces\Collection
 
     /**
      * @return false|mixed
-     * @throws emptyCollectionException
+     * @throws EmptyCollectionException
      */
     public function first()
     {
         if ($this->empty()) {
-            throw new emptyCollectionException('No first item in collection');
+            throw new EmptyCollectionException('No first item in collection');
         }
 
         return reset($this->items);
@@ -175,12 +175,12 @@ class Collection implements Interfaces\Collection
 
     /**
      * @return false|mixed
-     * @throws emptyCollectionException
+     * @throws EmptyCollectionException
      */
     public function last($optional = false)
     {
         if ($this->empty()) {
-            throw new emptyCollectionException('No last item in collection');
+            throw new EmptyCollectionException('No last item in collection');
         }
 
         return end($this->items);
