@@ -1,4 +1,4 @@
 <?php
-namespace Kcpck\Exception;
+namespace Kcpck\App\Exception;
 
 class EmptyCollectionException extends \Exception {}

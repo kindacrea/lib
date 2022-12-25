@@ -1,5 +1,5 @@
 <?php
-namespace Kcpck\Exception;
+namespace Kcpck\App\Exception;
 
 class undefinedPropertyException extends \Exception
 {

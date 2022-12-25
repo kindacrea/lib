@@ -1,5 +1,5 @@
 <?php
-namespace Kcpck\Collection\Interfaces;
+namespace Kcpck\App\Collection\Interfaces;
 
 interface Mapper
 {

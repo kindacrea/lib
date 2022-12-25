@@ -1,11 +1,10 @@
 <?php
-namespace Kcpck\Collection;
+namespace Kcpck\App\Collection;
 
-use JsonException;
-use Kcpck\Collection\Traits\Iterator;
-use Kcpck\Collection\Traits\Countable;
-use Kcpck\Collection\Traits\ArrayAccess;
-use Kcpck\Exception\EmptyCollectionException;
+use Kcpck\App\Collection\Traits\Iterator;
+use Kcpck\App\Collection\Traits\Countable;
+use Kcpck\App\Collection\Traits\ArrayAccess;
+use Kcpck\App\Exception\EmptyCollectionException;
 
 class Collection implements Interfaces\Collection
 {
@@ -109,12 +108,11 @@ class Collection implements Interfaces\Collection
      *
      * @param bool $indexed
      * @return array
-     * @throws JsonException
      */
     public function toArray(bool $indexed = false): array
     {
-        $encoded = json_encode($this->items, JSON_THROW_ON_ERROR);
-        $items = json_decode($encoded, true, 512, JSON_THROW_ON_ERROR);
+        $encoded = json_encode($this->items);
+        $items = json_decode($encoded, true, 512);
 
         if ($indexed) {
             return array_values($items);
@@ -134,7 +132,6 @@ class Collection implements Interfaces\Collection
 
     /**
      * Adds a string of items to the collection
-     * PTODO: missing test
      *
      * @param string $text
      * @param string $separator
@@ -207,7 +204,6 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * PTODO: missing test
      * @return bool
      */
     public function notEmpty(): bool
@@ -264,7 +260,10 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * PTODO: missing test
+     * @param int $offset
+     * @param int $length
+     * @param $replacement
+     * @return Interfaces\Collection
      */
     public function splice(int $offset, int $length, $replacement): Interfaces\Collection
     {
@@ -337,8 +336,6 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * PTODO: This could maybe be optimized with $this->items = $this->items[...$collection->to_array()];
-     *
      * @param Interfaces\Collection $collection
      * @return Interfaces\Collection
      */

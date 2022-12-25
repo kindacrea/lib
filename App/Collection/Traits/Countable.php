@@ -1,5 +1,5 @@
 <?php
-namespace Kcpck\Collection\Traits;
+namespace Kcpck\App\Collection\Traits;
 
 trait Countable
 {
