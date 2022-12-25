@@ -1,5 +1,5 @@
 {
-    "name": "kcpck/lib",
+    "name": "kcpckd/lib",
     "description": "Lib",
     "require": {
         "php": ">=7.2"
