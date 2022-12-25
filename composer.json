@@ -1,6 +1,6 @@
 {
     "name": "154115/lib",
-    "description": "A simple lib for PHP",
+    "description": "Lib",
     "require": {
         "php": ">=7.4"
     }
