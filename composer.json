@@ -1,5 +1,5 @@
 {
-    "name": "154115/lib",
+    "name": "pckg/lib",
     "description": "Lib",
     "require": {
         "php": ">=7.4"
