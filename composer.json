@@ -2,6 +2,6 @@
     "name": "kcpck/lib",
     "description": "Lib",
     "require": {
-        "php": ">=7.4"
+        "php": ">=7.2"
     }
 }
