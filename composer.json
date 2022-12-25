@@ -1,6 +1,8 @@
 {
     "name": "kcpck/lib",
     "description": "Lib",
+    "type": "library",
+    "license": "MIT",
     "require": {
         "php": ">=7.2"
     }
