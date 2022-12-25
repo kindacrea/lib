@@ -1,5 +1,5 @@
 {
-    "name": "kindacre/lib",
+    "name": "kc/lib",
     "description": "A simple lib for PHP",
     "require": {
         "php": ">=7.4"
