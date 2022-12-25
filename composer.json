@@ -1,1 +1,7 @@
-
+{
+    "name": "kindacrea/lib",
+    "description": "A simple lib for PHP",
+    "require": {
+        "php": ">=7.4"
+    }
+}
