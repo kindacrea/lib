@@ -1,6 +1,6 @@
 {
     "name": "kcpck/lib",
-    "description": "Lib",
+    "description": "Demo lib for general setup.",
     "type": "library",
     "license": "MIT",
     "require": {
