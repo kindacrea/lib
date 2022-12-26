@@ -49,12 +49,6 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * Example:
-     * $test = new TestCollection();
-     * $test->sort(function(entity $entity) {
-     *    return $entity->id;
-     * });
-     *
      * @param callable $selector
      * @param bool $direction_asc
      * @return void
@@ -76,12 +70,6 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * Example:
-     * $test = new TestCollection();
-     * $names = $collection->pluck(function($instance) {
-     *    return $instance['name'] ?? null;
-     * });
-     *
      * @param callable $instance
      * @return Interfaces\Collection
      */
@@ -103,8 +91,8 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * The model needs to implement \JsonSerializable and
-     * use the method "jsonSerialize" for this to work.
+     * Model must implement \JsonSerializable use the
+     * method "jsonSerialize" for this to work.
      *
      * @param bool $indexed
      * @return array
@@ -131,8 +119,6 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * Adds a string of items to the collection
-     *
      * @param string $text
      * @param string $separator
      * @return Interfaces\Collection
@@ -230,17 +216,6 @@ class Collection implements Interfaces\Collection
     }
 
     /**
-     * Example:
-     * $test = new TestCollection();
-     * $list = $collection->to_list(
-     *    function($item){
-     *       return $item->id;
-     *    },
-     *    function($item){
-     *       return $item->name;
-     *    }
-     * );
-     *
      * @param callable $key
      * @param callable $value
      * @param bool $append_items
@@ -302,17 +277,6 @@ class Collection implements Interfaces\Collection
         }
 
         return new static($found);
-    }
-
-    /**
-     * @param $item
-     * @return Interfaces\Collection
-     * @deprecated Replaced with the append($item) method
-     *
-     */
-    public function add($item): Interfaces\Collection
-    {
-        return $this->append($item);
     }
 
     /**

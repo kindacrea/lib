@@ -1,7 +1,7 @@
 <?php
 namespace Kcpck\App\Exception;
 
-class undefinedPropertyException extends \Exception
+class UndefinedPropertyException extends \Exception
 {
     public function __construct(string $property_name, int $code = 0, \Throwable $previous = null)
     {

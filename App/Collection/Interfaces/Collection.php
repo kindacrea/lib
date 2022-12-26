@@ -23,7 +23,7 @@ interface Collection extends \Iterator, \Countable, \ArrayAccess
     public function splice(int $offset, int $length, $replacement): Collection;
     public function shuffle($times = 1): Collection;
     public function find($value, string $field): Collection;
-    public function add($item): Collection;
+    public function append($item): Collection;
     public function merge(Collection $collection): Collection;
     public function contains(callable $field, $value): bool;
 }
