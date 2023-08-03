@@ -1,19 +1,29 @@
 <?php
 namespace Kcpck\App\Wordpress;
 
+use Kcpck\App\Interfaces\Factory as BaseFactory;
+
 class Factory implements Interfaces\Factory
 {
     /**
-     * @var string
+     * @var BaseFactory
      */
-    private $pluginSlug;
+    private $baseFactory;
 
     /**
-     * @param string $pluginSlug
+     * @param BaseFactory $baseFactory
      */
-    public function __construct(string $pluginSlug)
+    public function __construct(BaseFactory $baseFactory)
     {
-        $this->pluginSlug = $pluginSlug;
+        $this->baseFactory = $baseFactory;
+    }
+
+    /**
+     * @return Post\Interfaces\Factory
+     */
+    public function post(): Post\Interfaces\Factory
+    {
+        return new Post\Factory($this->baseFactory);
     }
 
     /**
@@ -31,6 +41,6 @@ class Factory implements Interfaces\Factory
      */
     public function getOption(string $key)
     {
-        return get_option($this->pluginSlug . '_' . $key);
+        return get_option($this->baseFactory->getPluginSlug() . '_' . $key);
     }
 }

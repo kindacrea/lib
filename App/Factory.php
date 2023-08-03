@@ -8,25 +8,33 @@ use Kcpck\App\Woocommerce;
 class Factory implements Interfaces\Factory
 {
     private static $instance;
+    private $pluginSlug;
+
+    /**
+     * @param string $pluginSlug
+     */
+    private function __construct(string $pluginSlug)
+    {
+        $this->pluginSlug = $pluginSlug;
+    }
 
     /**
      * @return static
      */
-    public static function make(): self
+    public static function make(string $pluginSlug): self
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self($pluginSlug);
         }
         return self::$instance;
     }
 
     /**
-     * @param string $pluginSlug
      * @return Wordpress\Interfaces\Factory
      */
-    public function wordpress(string $pluginSlug): Wordpress\Interfaces\Factory
+    public function wordpress(): Wordpress\Interfaces\Factory
     {
-        return new Wordpress\Factory($pluginSlug);
+        return new Wordpress\Factory($this);
     }
 
     /**
@@ -44,5 +52,13 @@ class Factory implements Interfaces\Factory
     public function collection(array $items = []): Collection\Interfaces\Collection
     {
         return new Collection\Collection($items);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPluginSlug(): string
+    {
+        return $this->pluginSlug;
     }
 }

@@ -7,7 +7,8 @@ use Kcpck\App\Collection\Interfaces\Collection;
 
 interface Factory
 {
-    public function wordpress(string $pluginSlug): WordpressFactory;
+    public function wordpress(): WordpressFactory;
     public function woocommerce(): WoocommerceFactory;
     public function collection(array $items = []): Collection;
+    public function getPluginSlug(): string;
 }
