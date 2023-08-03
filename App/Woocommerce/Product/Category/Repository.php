@@ -35,4 +35,30 @@ class Repository implements Interfaces\Repository
 
         return self::$baseFactory->collection(self::$productCategories->getData());
     }
+
+    private $childCategories;
+
+    /**
+     * @param Collection $categories
+     * @param int $categoryId
+     * @param bool $recursive
+     * @return Collection
+     */
+    public function getChildrenByCategoryId(Collection $categories, int $categoryId, bool $recursive = false): Collection
+    {
+        if (empty($this->childCategories)) {
+            $this->childCategories = self::$baseFactory->collection();
+        }
+        foreach ($categories as $category) {
+            if (empty($category->children)) {
+                continue;
+            }
+            if ($category->term_id === $categoryId) {
+                $this->childCategories = self::$baseFactory->collection($category->children);
+            } else if ($recursive) {
+                $this->getChildrenByCategoryId(self::$baseFactory->collection($category->children), $categoryId, $recursive);
+            }
+        }
+        return $this->childCategories;
+    }
 }
