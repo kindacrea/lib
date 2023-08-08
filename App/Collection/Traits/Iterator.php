@@ -8,6 +8,7 @@ trait Iterator
      * @return array Can return any type.
      * @since 5.0.0
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return current($this->items);
@@ -18,6 +19,7 @@ trait Iterator
      * @return void Any returned value is ignored.
      * @since 5.0.0
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->items);
@@ -28,6 +30,7 @@ trait Iterator
      * @return mixed scalar on success, or null on failure.
      * @since 5.0.0
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->items);
@@ -39,6 +42,7 @@ trait Iterator
      * Returns true on success or false on failure.
      * @since 5.0.0
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return array_key_exists(key($this->items), $this->items);
@@ -49,6 +53,7 @@ trait Iterator
      * @return void Any returned value is ignored.
      * @since 5.0.0
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->items);

@@ -37,6 +37,7 @@ trait ArrayAccess
 	 * @param $offset
 	 * @return mixed|null
 	 */
+    #[\ReturnTypeWillChange]
 	public function offsetGet($offset)
     {
 		return $this->items[$offset] ?? null;
