@@ -30,7 +30,8 @@ class Repository implements Interfaces\Repository
      * @param string $postStatus
      * @return Collection
      */
-    public function getAll(array $postMetaFieldKeys, string $postType = 'post', string $postStatus = 'publish'): Collection
+    public function getAll(int $menuId, array $postMetaFieldKeys, string $postType = 'post',
+                           string $postStatus = 'publish'): Collection
     {
         $metaFieldChunks = [];
         foreach ($postMetaFieldKeys as $metaKey) {
@@ -51,6 +52,24 @@ class Repository implements Interfaces\Repository
             }
             $postsMetaRecords[$row->post_id][$row->meta_key] = $row->meta_value;
         }
-        return $this->baseFactory->collection($postsMetaRecords);
+
+        return $this->baseFactory->collection($this->filterByMenuIdWhenPresent($postsMetaRecords, $menuId));
+    }
+
+    /**
+     * @param $postsMetaRecords
+     * @param $menuId
+     * @return array
+     */
+    private function filterByMenuIdWhenPresent($postsMetaRecords, $menuId)
+    {
+        $filteredPostsMetaRecords = [];
+        foreach ($postsMetaRecords as $row) {
+            if (isset($row['menu_id']) && (int)$row['menu_id'] !== $menuId) {
+                continue;
+            }
+            $filteredPostsMetaRecords[] = $row;
+        }
+        return $filteredPostsMetaRecords;
     }
 }

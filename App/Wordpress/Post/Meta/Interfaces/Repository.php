@@ -5,5 +5,6 @@ use Kcpck\App\Collection\Interfaces\Collection;
 
 interface Repository
 {
-    public function getAll(array $postMetaFieldKeys, string $postType = 'post', string $postStatus = 'publish'): Collection;
+    public function getAll(int $menuId, array $postMetaFieldKeys, string $postType = 'post',
+                           string $postStatus = 'publish'): Collection;
 }
