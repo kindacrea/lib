@@ -6,4 +6,5 @@ use Kcpck\App\Woocommerce\Product\Category\Interfaces\Factory as CategoryFactory
 interface Factory
 {
     public function category(): CategoryFactory;
+    public function repository(): Repository;
 }

@@ -25,4 +25,12 @@ class Factory implements Interfaces\Factory
     {
         return new Category\Factory($this->baseFactory);
     }
+
+    /**
+     * @return Interfaces\Repository
+     */
+    public function repository(): Interfaces\Repository
+    {
+        return new Repository();
+    }
 }
