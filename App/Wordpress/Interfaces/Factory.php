@@ -7,5 +7,5 @@ interface Factory
 {
     public function post(): PostFactory;
     public function db(): \wpdb;
-    public function getOption(string $key);
+    public function getOption(string $key, ?string $slug = null);
 }

@@ -39,8 +39,12 @@ class Factory implements Interfaces\Factory
      * @param string $key
      * @return false|mixed|null
      */
-    public function getOption(string $key)
+    public function getOption(string $key, ?string $slug = null)
     {
-        return get_option($this->baseFactory->getPluginSlug() . '_' . $key);
+        $currentSlug = $this->baseFactory->getPluginSlug();
+        if ($slug !== null) {
+            $currentSlug = $slug;
+        }
+        return get_option($currentSlug . '_' . $key);
     }
 }
