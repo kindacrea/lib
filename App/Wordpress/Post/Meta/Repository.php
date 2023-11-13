@@ -25,12 +25,14 @@ class Repository implements Interfaces\Repository
     }
 
     /**
+     * @param int $uniqueId
+     * @param string $uniqueColumn
      * @param array $postMetaFieldKeys
      * @param string $postType
      * @param string $postStatus
      * @return Collection
      */
-    public function getAll(int $menuId, array $postMetaFieldKeys, string $postType = 'post',
+    public function getAll(int $uniqueId, string $uniqueColumn, array $postMetaFieldKeys, string $postType = 'post',
                            string $postStatus = 'publish'): Collection
     {
         $metaFieldChunks = [];
@@ -53,19 +55,20 @@ class Repository implements Interfaces\Repository
             $postsMetaRecords[$row->post_id][$row->meta_key] = $row->meta_value;
         }
 
-        return $this->baseFactory->collection($this->filterByMenuIdWhenPresent($postsMetaRecords, $menuId));
+        return $this->baseFactory->collection($this->filterByUniqueIdWhenPresent($postsMetaRecords, $uniqueId, $uniqueColumn));
     }
 
     /**
      * @param $postsMetaRecords
-     * @param $menuId
+     * @param $uniqueId
+     * @param $uniqueColumn
      * @return array
      */
-    private function filterByMenuIdWhenPresent($postsMetaRecords, $menuId)
+    private function filterByUniqueIdWhenPresent($postsMetaRecords, $uniqueId, $uniqueColumn): array
     {
         $filteredPostsMetaRecords = [];
         foreach ($postsMetaRecords as $row) {
-            if (isset($row['menu_id']) && (int)$row['menu_id'] !== $menuId) {
+            if (isset($row[$uniqueColumn]) && (int)$row[$uniqueColumn] !== $uniqueId) {
                 continue;
             }
             $filteredPostsMetaRecords[] = $row;
