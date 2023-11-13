@@ -4,6 +4,19 @@ namespace Kcpck\App\Woocommerce\Product;
 class Repository implements Interfaces\Repository
 {
     /**
+     * @return array
+     */
+    public function getAll(): array
+    {
+        return wc_get_products([
+            'status' => 'publish',
+            'limit' => -1,
+            'orderby' => 'name',
+            'order' => 'ASC',
+        ]);
+    }
+
+    /**
      * @param array $categoryIds
      * @return array
      */
