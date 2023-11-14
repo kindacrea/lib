@@ -24,6 +24,7 @@ class Repository implements Interfaces\Repository
     {
         return (new \WP_Query([
             'post_status' => 'publish',
+            'posts_per_page' => -1,
             'tax_query' => [
                 [
                     'taxonomy' => 'product_cat',
