@@ -29,10 +29,12 @@ class Repository implements Interfaces\Repository
      * @param string $postType
      * @param string $postStatus
      * @param int|null $postId
+     * @param string $orderBy
+     * @param string $orderDir
      * @return Collection
      */
     public function getAll(array $postMetaFieldKeys, string $postType = 'post', string $postStatus = 'publish',
-                           ?int $postId = null): Collection
+                           ?int $postId = null, string $orderBy = 'pm.post_id', string $orderDir = 'ASC'): Collection
     {
         $metaFieldChunks = [];
         foreach ($postMetaFieldKeys as $metaKey) {
@@ -47,6 +49,7 @@ class Repository implements Interfaces\Repository
         if ($postId !== null) {
             $sql .= ' AND pm.post_id = \'' . $postId . '\'';
         }
+        $sql .= ' ORDER BY ' . $orderBy . ' ' . $orderDir;
         $unstructuredMetaData = $this->db->get_results($sql, OBJECT);
 
         $postsMetaRecords = [];
