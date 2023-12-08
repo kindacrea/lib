@@ -64,14 +64,14 @@ class Repository implements Interfaces\Repository
     }
 
     /**
-     * @param int $uniqueId
+     * @param string $uniqueId
      * @param string $uniqueColumn
      * @param array $postMetaFieldKeys
      * @param string $postType
      * @param string $postStatus
      * @return Collection
      */
-    public function getAllByMetaIdentifier(int $uniqueId, string $uniqueColumn, array $postMetaFieldKeys,
+    public function getAllByMetaIdentifier(string $uniqueId, string $uniqueColumn, array $postMetaFieldKeys,
                                            string $postType = 'post', string $postStatus = 'publish'): Collection
     {
         $postsMetaRecords = $this->getAll($postMetaFieldKeys, $postType, $postStatus)->toArray();
@@ -80,15 +80,15 @@ class Repository implements Interfaces\Repository
 
     /**
      * @param array $postsMetaRecords
-     * @param int $uniqueId
+     * @param string $uniqueId
      * @param string $uniqueColumn
      * @return array
      */
-    private function filterByUniqueIdWhenPresent(array $postsMetaRecords, int $uniqueId, string $uniqueColumn): array
+    private function filterByUniqueIdWhenPresent(array $postsMetaRecords, string $uniqueId, string $uniqueColumn): array
     {
         $filteredPostsMetaRecords = [];
         foreach ($postsMetaRecords as $row) {
-            if (isset($row[$uniqueColumn]) && (int)$row[$uniqueColumn] !== $uniqueId) {
+            if (isset($row[$uniqueColumn]) && (string)$row[$uniqueColumn] !== $uniqueId) {
                 continue;
             }
             $filteredPostsMetaRecords[] = $row;
