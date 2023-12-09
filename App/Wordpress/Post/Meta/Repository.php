@@ -74,6 +74,7 @@ class Repository implements Interfaces\Repository
     public function getAllByMetaIdentifier(string $uniqueId, string $uniqueColumn, array $postMetaFieldKeys,
                                            string $postType = 'post', string $postStatus = 'publish'): Collection
     {
+        $postMetaFieldKeys = $this->addRequiredUniqueColumnToPostMetaFieldKeys($uniqueColumn, $postMetaFieldKeys);
         $postsMetaRecords = $this->getAll($postMetaFieldKeys, $postType, $postStatus)->toArray();
         return $this->baseFactory->collection($this->filterByUniqueIdWhenPresent($postsMetaRecords, $uniqueId, $uniqueColumn));
     }
@@ -88,11 +89,25 @@ class Repository implements Interfaces\Repository
     {
         $filteredPostsMetaRecords = [];
         foreach ($postsMetaRecords as $row) {
-            if (isset($row[$uniqueColumn]) && (string)$row[$uniqueColumn] !== $uniqueId) {
+            if (isset($row[$uniqueColumn]) &&
+                mb_strtolower((string)$row[$uniqueColumn], 'UTF-8') !== mb_strtolower($uniqueId, 'UTF-8')) {
                 continue;
             }
             $filteredPostsMetaRecords[] = $row;
         }
         return $filteredPostsMetaRecords;
+    }
+
+    /**
+     * @param string $uniqueColumn
+     * @param array $postMetaFieldKeys
+     * @return array
+     */
+    public function addRequiredUniqueColumnToPostMetaFieldKeys(string $uniqueColumn, array $postMetaFieldKeys): array
+    {
+        if (!in_array($uniqueColumn, $postMetaFieldKeys, true)) {
+            array_unshift($postMetaFieldKeys, $uniqueColumn);
+        }
+        return $postMetaFieldKeys;
     }
 }
