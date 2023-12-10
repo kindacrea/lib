@@ -55,7 +55,7 @@ class Repository implements Interfaces\Repository
         $postsMetaRecords = [];
         foreach ($unstructuredMetaData as $row) {
             if (!isset($postsMetaRecords[$row->post_id])) {
-                $postsMetaRecords[$row->post_id] = [];
+                $postsMetaRecords[$row->post_id]['post_id'] = (int)$row->post_id;
             }
             $postsMetaRecords[$row->post_id][$row->meta_key] = $row->meta_value;
         }
